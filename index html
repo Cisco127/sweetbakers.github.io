@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Bakers - Food Ordering</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fdf5e6;
+            color: #333;
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffcc99;
+            color: #fff;
+        }
+        h1 {
+            margin: 0;
+        }
+        .menu {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .menu h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #cc6600;
+        }
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        form h2 {
+            text-align: center;
+            color: #cc6600;
+        }
+        form label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        form input, form textarea, form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        form button {
+            background-color: #cc6600;
+            color: #fff;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #ff9933;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Welcome to Sweet Bakers</h1>
+    <p>Your delicious treats are just a click away!</p>
+</header>
+
+<div class="menu">
+    <h2>Menu</h2>
+    <div class="menu-item"><span>Vanilla Cake</span><span>Ksh 1000 per kg</span></div>
+    <div class="menu-item"><span>Marble Cake</span><span>Ksh 1500 per kg</span></div>
+    <div class="menu-item"><span>Lemon Cake</span><span>Ksh 500 per kg</span></div>
+    <div class="menu-item"><span>Fruit Cake</span><span>Ksh 2000 per kg</span></div>
+    <div class="menu-item"><span>Chocolate Cake</span><span>Ksh 1500 per kg</span></div>
+    <div class="menu-item"><span>Muffins</span><span>Ksh 15 per piece</span></div>
+    <div class="menu-item"><span>Swiss Rolls</span><span>Ksh 100 per piece</span></div>
+    <div class="menu-item"><span>Cookies</span><span>Ksh 10 per piece</span></div>
+    <div class="menu-item"><span>Buns</span><span>Ksh 20 per piece</span></div>
+    <div class="menu-item"><span>Scones</span><span>Ksh 20 per piece</span></div>
+</div>
+
+<form id="orderForm">
+    <h2>Place Your Order</h2>
+    
+    <label for="name">Your Name</label>
+    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+    <label for="email">Your Email</label>
+    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+    <label for="order">Your Order</label>
+    <textarea id="order" name="order" rows="5" placeholder="List the items you want to order" required></textarea>
+
+    <label for="deliveryDate">Delivery Date</label>
+    <input type="date" id="deliveryDate" name="deliveryDate" required>
+
+    <button type="submit">Place Order</button>
+</form>
+
+<script>
+    // Initialize EmailJS
+    (function() {
+        emailjs.init("PcAyLiveKhG4NZAZE"); // Replace with your EmailJS Public Key
+    })();
+
+    // Handle form submission
+    document.getElementById('orderForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const order = document.getElementById('order').value;
+        const deliveryDate = document.getElementById('deliveryDate').value;
+
+        const templateParams = {
+            user_name: name,
+            user_email: email,
+            user_order: order,
+            delivery_date: deliveryDate
+        };
+
+        emailjs.send("service_9pzhyrt", "template_9z96le8", templateParams)
+            .then(function(response) {
+                alert("Order placed successfully! We'll notify the baker.");
+                console.log("SUCCESS!", response.status, response.text);
+            }, function(error) {
+                alert("There was an error placing your order. Please try again.");
+                console.log("FAILED...", error);
+            });
+
+        // Reset the form after submission
+        document.getElementById('orderForm').reset();
+    });
+</script>
+
+</body>
+</html>
