@@ -6,9 +6,6 @@
     <title>Sweet Bakers - Food Ordering</title>
     <link rel="stylesheet" href="../style.css">
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <style>
-        /* Keep your existing styles */
-    </style>
 </head>
 <body>
 
@@ -101,66 +98,7 @@
     <button type="submit">Place Order</button>
 </form>
 
-<script>
-    // JavaScript to handle cart functionality
-    let cart = [];
-
-    document.querySelectorAll(".add-to-cart").forEach((button) => {
-        button.addEventListener("click", function () {
-            const name = this.dataset.name;
-            const price = parseInt(this.dataset.price);
-            addToCart(name, price);
-            updateCartUI();
-        });
-    });
-
-    function addToCart(name, price) {
-        const existingItem = cart.find((item) => item.name === name);
-        if (existingItem) {
-            existingItem.quantity++;
-            existingItem.subtotal = existingItem.quantity * existingItem.price;
-        } else {
-            cart.push({ name, price, quantity: 1, subtotal: price });
-        }
-    }
-
-    function updateCartUI() {
-        const cartItems = document.querySelector("#cart-items tbody");
-        cartItems.innerHTML = "";
-        cart.forEach((item, index) => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td>${item.name}</td>
-                <td>Ksh ${item.price}</td>
-                <td>${item.quantity}</td>
-                <td>Ksh ${item.subtotal}</td>
-                <td><button class="remove-item" data-index="${index}">Remove</button></td>
-            `;
-            cartItems.appendChild(row);
-        });
-
-        const total = cart.reduce((sum, item) => sum + item.subtotal, 0);
-        document.getElementById("cart-total").textContent = total.toFixed(2);
-
-        document.querySelectorAll(".remove-item").forEach((button) => {
-            button.addEventListener("click", function () {
-                const index = parseInt(this.dataset.index);
-                cart.splice(index, 1);
-                updateCartUI();
-            });
-        });
-    }
-
-    document.getElementById("checkout-button").addEventListener("click", function () {
-        if (cart.length === 0) {
-            alert("Your cart is empty.");
-            return;
-        }
-
-        let orderDetails = cart.map((item) => `${item.quantity}x ${item.name} - Ksh ${item.subtotal}`).join("\n");
-        alert("Order Summary:\n" + orderDetails + "\nTotal: Ksh " + cart.reduce((sum, item) => sum + item.subtotal, 0).toFixed(2));
-    });
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
