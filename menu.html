@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu - Sweet Bakers</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Sweet Bakers</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="cart.html">Cart</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="menu">
+    <h2>Our Menu</h2>
+    <ul>
+      <li>
+        <h3>Chocolate Cake</h3>
+        <p>Price: KSH 500</p>
+        <button onclick="addToCart('Chocolate Cake', 500)">Add to Cart</button>
+      </li>
+      <li>
+        <h3>Vanilla Cupcake</h3>
+        <p>Price: KSH 120</p>
+        <button onclick="addToCart('Vanilla Cupcake', 120)">Add to Cart</button>
+      </li>
+      <li>
+        <h3>Red Velvet Cake</h3>
+        <p>Price: KSH 700</p>
+        <button onclick="addToCart('Red Velvet Cake', 700)">Add to Cart</button>
+      </li>
+    </ul>
+  </section>
+</body>
+</html>
