@@ -36,9 +36,9 @@ function updateCartUI() {
         const row = document.createElement("tr");
         row.innerHTML = `
             <td>${item.name}</td>
-            <td>$${item.price.toFixed(2)}</td>
+            <td>Ksh ${item.price.toFixed(2)}</td>
             <td>${item.quantity}</td>
-            <td>$${item.subtotal.toFixed(2)}</td>
+            <td>Ksh ${item.subtotal.toFixed(2)}</td>
             <td><button class="remove-item" data-index="${index}">Remove</button></td>
         `;
         cartItems.appendChild(row);
@@ -66,29 +66,23 @@ document.getElementById("checkout-button").addEventListener("click", function ()
     }
 
     const orderDetails = cart
-        .map((item) => `Ksh{item.quantity}x Ksh{item.name} - Ksh{item.subtotal.toFixed(2)}`)
+        .map((item) => `${item.quantity}x ${item.name} - Ksh ${item.subtotal.toFixed(2)}`)
         .join("\n");
 
     const total = cart.reduce((sum, item) => sum + item.subtotal, 0);
 
     const templateParams = {
         user_name: "Customer",
-        user_email: "customer@example.com",
+        user_email: "customer@example.com", // Replace if dynamic email is desired
         user_order: orderDetails,
         delivery_date: "N/A",
         total_amount: total.toFixed(2),
     };
 
     emailjs
-        .send("service_9pzhyrt", "template_9z96le8", templateParams)
+        .send("service_9pzhyrt", "template_9z96le8", templateParams) // Replace with your EmailJS Service and Template IDs
         .then((response) => {
             alert("Order placed successfully!");
             console.log("SUCCESS!", response.status, response.text);
-            cart = []; // Clear the cart
-            updateCartUI();
-        })
-        .catch((error) => {
-            alert("There was an error processing your order. Please try again.");
-            console.log("FAILED...", error);
-        });
-});
+            cart =*
+
