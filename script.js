@@ -1,6 +1,6 @@
 // Initialize EmailJS
 (function () {
-    emailjs.init("PcAyLiveKhG4NZAZE"); // Replace with your EmailJS Public Key
+    emailjs.init("R6nKBqsMuWHeU-dCl"); // Replace with your EmailJS Public Key
 })();
 
 // Cart Data
@@ -44,11 +44,9 @@ function updateCartUI() {
         cartItems.appendChild(row);
     });
 
-    // Update total
     const total = cart.reduce((sum, item) => sum + item.subtotal, 0);
     document.getElementById("cart-total").textContent = total.toFixed(2);
 
-    // Add remove item functionality
     document.querySelectorAll(".remove-item").forEach((button) => {
         button.addEventListener("click", function () {
             const index = parseInt(this.dataset.index, 10);
@@ -73,16 +71,55 @@ document.getElementById("checkout-button").addEventListener("click", function ()
 
     const templateParams = {
         user_name: "Customer",
-        user_email: "customer@example.com", // Replace if dynamic email is desired
+        user_email: "customer@example.com", // Replace with dynamic email if needed
         user_order: orderDetails,
         delivery_date: "N/A",
         total_amount: total.toFixed(2),
     };
 
+    console.log("Sending email with the following details:", templateParams);
+
     emailjs
-        .send("service_9pzhyrt", "template_9z96le8", templateParams) // Replace with your EmailJS Service and Template IDs
+        .send("service_le4lkf5", "template_of6il3c", templateParams)
         .then((response) => {
             alert("Order placed successfully!");
             console.log("SUCCESS!", response.status, response.text);
-            cart =*
-
+            cart = []; // Clear the cart
+            updateCartUI();
+        })
+        .catch((error) => {
+            alert("There was an error processing your order. Please try again.");
+            console.error("FAILED...", error);
+        });
+});
+
+// Order Form Submission
+document.getElementById("orderForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const order = document.getElementById("order").value;
+    const deliveryDate = document.getElementById("deliveryDate").value;
+
+    const templateParams = {
+        user_name: name,
+        user_email: email,
+        user_order: order,
+        delivery_date: deliveryDate,
+    };
+
+    console.log("Sending email with the following details:", templateParams);
+
+    emailjs
+        .send("service_le4lkf5", "template_of6il3c", templateParams)
+        .then((response) => {
+            alert("Order placed successfully! We'll notify the baker.");
+            console.log("SUCCESS!", response.status, response.text);
+            document.getElementById("orderForm").reset();
+        })
+        .catch((error) => {
+            alert("There was an error placing your order. Please try again.");
+            console.error("FAILED...", error);
+        });
+});
