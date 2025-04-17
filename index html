@@ -4,80 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sweet Bakers - Food Ordering</title>
-<link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style.css">
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #fdf5e6;
-            color: #333;
-        }
-        header {
-            text-align: center;
-            padding: 20px;
-            background-color: #ffcc99;
-            color: #fff;
-        }
-        h1 {
-            margin: 0;
-        }
-        .menu {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        .menu h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #cc6600;
-        }
-        .menu-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #ddd;
-        }
-        .menu-item:last-child {
-            border-bottom: none;
-        }
-        form {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        form h2 {
-            text-align: center;
-            color: #cc6600;
-        }
-        form label {
-            display: block;
-            margin: 10px 0 5px;
-        }
-        form input, form textarea, form button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        form button {
-            background-color: #cc6600;
-            color: #fff;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-        }
-        form button:hover {
-            background-color: #ff9933;
-        }
+        /* Keep your existing styles */
     </style>
 </head>
 <body>
@@ -89,16 +19,68 @@
 
 <div class="menu">
     <h2>Menu</h2>
-    <div class="menu-item"><span>Vanilla Cake</span><span>Ksh 1000 per kg</span></div>
-    <div class="menu-item"><span>Marble Cake</span><span>Ksh 1500 per kg</span></div>
-    <div class="menu-item"><span>Lemon Cake</span><span>Ksh 500 per kg</span></div>
-    <div class="menu-item"><span>Fruit Cake</span><span>Ksh 2000 per kg</span></div>
-    <div class="menu-item"><span>Chocolate Cake</span><span>Ksh 1500 per kg</span></div>
-    <div class="menu-item"><span>Muffins</span><span>Ksh 15 per piece</span></div>
-    <div class="menu-item"><span>Swiss Rolls</span><span>Ksh 100 per piece</span></div>
-    <div class="menu-item"><span>Cookies</span><span>Ksh 10 per piece</span></div>
-    <div class="menu-item"><span>Buns</span><span>Ksh 20 per piece</span></div>
-    <div class="menu-item"><span>Scones</span><span>Ksh 20 per piece</span></div>
+    <div class="menu-item">
+        <span>Vanilla Cake</span><span>Ksh 1000 per kg</span>
+        <button class="add-to-cart" data-name="Vanilla Cake" data-price="1000">Add to Cart</button>
+    </div>
+    <div class="menu-item">
+        <span>Marble Cake</span><span>Ksh 1500 per kg</span>
+        <button class="add-to-cart" data-name="Marble Cake" data-price="1500">Add to Cart</button>
+    </div>
+    <div class="menu-item">
+        <span>Lemon Cake</span><span>Ksh 500 per kg</span>
+        <button class="add-to-cart" data-name="Lemon Cake" data-price="500">Add to Cart</button>
+    </div>
+    <div class="menu-item">
+        <span>Fruit Cake</span><span>Ksh 2000 per kg</span>
+        <button class="add-to-cart" data-name="Fruit Cake" data-price="2000">Add to Cart</button>
+    </div>
+    <div class="menu-item">
+        <span>Chocolate Cake</span><span>Ksh 1500 per kg</span>
+        <button class="add-to-cart" data-name="Chocolate Cake" data-price="1500">Add to Cart</button>
+    </div>
+    <div class="menu-item">
+        <span>Muffins</span><span>Ksh 15 per piece</span>
+        <button class="add-to-cart" data-name="Muffins" data-price="15">Add to Cart</button>
+    </div>
+    <div class="menu-item">
+        <span>Swiss Rolls</span><span>Ksh 100 per piece</span>
+        <button class="add-to-cart" data-name="Swiss Rolls" data-price="100">Add to Cart</button>
+    </div>
+    <div class="menu-item">
+        <span>Cookies</span><span>Ksh 10 per piece</span>
+        <button class="add-to-cart" data-name="Cookies" data-price="10">Add to Cart</button>
+    </div>
+    <div class="menu-item">
+        <span>Buns</span><span>Ksh 20 per piece</span>
+        <button class="add-to-cart" data-name="Buns" data-price="20">Add to Cart</button>
+    </div>
+    <div class="menu-item">
+        <span>Scones</span><span>Ksh 20 per piece</span>
+        <button class="add-to-cart" data-name="Scones" data-price="20">Add to Cart</button>
+    </div>
+</div>
+
+<div class="cart">
+    <h2>Your Cart</h2>
+    <table id="cart-items">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Cart items will be dynamically added here -->
+        </tbody>
+    </table>
+    <div class="cart-summary">
+        <h3>Total: Ksh <span id="cart-total">0.00</span></h3>
+        <button id="checkout-button">Checkout</button>
+    </div>
 </div>
 
 <form id="orderForm">
@@ -120,38 +102,63 @@
 </form>
 
 <script>
-    // Initialize EmailJS
-    (function() {
-        emailjs.init("PcAyLiveKhG4NZAZE"); // Replace with your EmailJS Public Key
-    })();
+    // JavaScript to handle cart functionality
+    let cart = [];
 
-    // Handle form submission
-    document.getElementById('orderForm').addEventListener('submit', function(event) {
-        event.preventDefault();
+    document.querySelectorAll(".add-to-cart").forEach((button) => {
+        button.addEventListener("click", function () {
+            const name = this.dataset.name;
+            const price = parseInt(this.dataset.price);
+            addToCart(name, price);
+            updateCartUI();
+        });
+    });
 
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const order = document.getElementById('order').value;
-        const deliveryDate = document.getElementById('deliveryDate').value;
+    function addToCart(name, price) {
+        const existingItem = cart.find((item) => item.name === name);
+        if (existingItem) {
+            existingItem.quantity++;
+            existingItem.subtotal = existingItem.quantity * existingItem.price;
+        } else {
+            cart.push({ name, price, quantity: 1, subtotal: price });
+        }
+    }
 
-        const templateParams = {
-            user_name: name,
-            user_email: email,
-            user_order: order,
-            delivery_date: deliveryDate
-        };
+    function updateCartUI() {
+        const cartItems = document.querySelector("#cart-items tbody");
+        cartItems.innerHTML = "";
+        cart.forEach((item, index) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${item.name}</td>
+                <td>Ksh ${item.price}</td>
+                <td>${item.quantity}</td>
+                <td>Ksh ${item.subtotal}</td>
+                <td><button class="remove-item" data-index="${index}">Remove</button></td>
+            `;
+            cartItems.appendChild(row);
+        });
 
-        emailjs.send("service_9pzhyrt", "template_9z96le8", templateParams)
-            .then(function(response) {
-                alert("Order placed successfully! We'll notify the baker.");
-                console.log("SUCCESS!", response.status, response.text);
-            }, function(error) {
-                alert("There was an error placing your order. Please try again.");
-                console.log("FAILED...", error);
+        const total = cart.reduce((sum, item) => sum + item.subtotal, 0);
+        document.getElementById("cart-total").textContent = total.toFixed(2);
+
+        document.querySelectorAll(".remove-item").forEach((button) => {
+            button.addEventListener("click", function () {
+                const index = parseInt(this.dataset.index);
+                cart.splice(index, 1);
+                updateCartUI();
             });
+        });
+    }
 
-        // Reset the form after submission
-        document.getElementById('orderForm').reset();
+    document.getElementById("checkout-button").addEventListener("click", function () {
+        if (cart.length === 0) {
+            alert("Your cart is empty.");
+            return;
+        }
+
+        let orderDetails = cart.map((item) => `${item.quantity}x ${item.name} - Ksh ${item.subtotal}`).join("\n");
+        alert("Order Summary:\n" + orderDetails + "\nTotal: Ksh " + cart.reduce((sum, item) => sum + item.subtotal, 0).toFixed(2));
     });
 </script>
 
